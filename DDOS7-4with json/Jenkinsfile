@@ -1,12 +1,3 @@
-DELLEMC-DPS-Jenkins/aws-instance-first-script/Jenkinsfile
-@juergenschubert
-juergenschubert Update Jenkinsfile
-Latest commit f5bd730 6 days ago
- History
- 1 contributor
-82 lines (69 sloc)  2.45 KB
-  
-
 pipeline {
 
     parameters {
