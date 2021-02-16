@@ -1,0 +1,54 @@
+DELLEMC-DPS-Jenkins/aws-instance-first-script/Jenkinsfile
+@juergenschubert
+juergenschubert Update Jenkinsfile
+Latest commit f5bd730 6 days ago
+ History
+ 1 contributor
+82 lines (69 sloc)  2.45 KB
+  
+
+pipeline {
+
+    parameters {
+        booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
+        booleanParam(name: 'autoDELApprove', defaultValue: false, description: 'Automatically run destroy after generating plan?')
+
+    }
+
+
+     environment {
+        AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+
+   agent  any
+        options {
+                timestamps ()
+            }
+    stages {
+        stage('checkout') {
+            steps {
+                 script{
+                        dir("terraform")
+                        {
+                            git "https://github.com/juergenschubert/DELLEMC-DPS-Jenkins.git"
+                        }
+                    }
+                }
+            }
+    stage('terraform') {
+          sh """
+             terraform init
+             terraform plan
+             terraform apply --auto-approve
+          """
+          //write the template output in a file
+          def fileContent = sh(returnStdout: true, script: "terraform output neededForAnsible")
+          writeFile file: "${WORKSPACE}/vars.yaml", text: fileContent
+        }
+    stage('ansible') {
+      sh """
+          ansible-playbook release.yml -e @vars.yaml
+       """
+   }
+ }

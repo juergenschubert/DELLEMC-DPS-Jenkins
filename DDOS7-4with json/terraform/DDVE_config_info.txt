@@ -1,0 +1,7 @@
+DataDomain IP and DNS Information
+18.184.74.206
+ec2-18-184-74-206.eu-central-1.compute.amazonaws.com
+S3 bucket name for DDDVE config
+ddve6-bucket-terraform
+The aws instance ID is the sysadmin Password for the first login
+i-083063cf700c21211

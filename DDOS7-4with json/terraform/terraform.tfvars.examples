@@ -1,0 +1,39 @@
+access_key          = "<aws_acess_key>"
+secret_key          = "<aws_secret_key>"
+key_name            = "<aws_key_pair>"
+# FQDN Name of your DDVE
+ddve_name     = "ddve6"
+instance_name_tag = "ddve6-test"
+# IAM Policy and USER
+name_aws_iam_policy = "<Iam policy name>"
+name_ws_iam_user    = "<IAM User name"
+#ddve subnet ddve should run into
+aws_subnet_id     = "<subnet-id to deploy on>"
+#created for Frankfurt but changing this is easy
+region              = "eu-central-1"
+availabillity_zone  = "eu-central-1a"
+# Metadata Disk Size for DDVE
+# here you can sent the size of you ddve you wanna deploy with terraform apply
+#Instance Type# M5.xlarge M5.2xlarge M5.4xlarge M5.8xlarge
+#capacity     #   16          32          96       256
+#meta disk    #    2          4          10        13
+#size of  meta#   1024      1024       1024       2024
+instance_type       = "m4.xlarge"
+amount_of_metadisk  = 2
+ebs_volume_size = 1024
+/**/
+/*
+instance_type      = "M5.2xlarge"
+amount_of_metadisk = 4
+ebs_volume_size    = 1024
+*/
+/*
+instance_type      = "M5.4xlarge"
+amount_of_metadisk = 10
+ebs_volume_size    = 1024
+*/
+/*
+instance_type      = "M5.8xlarge"
+amount_of_metadisk = 13
+ebs_volume_size    = 2048
+*/

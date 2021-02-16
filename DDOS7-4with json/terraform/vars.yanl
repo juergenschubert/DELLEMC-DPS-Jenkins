@@ -1,0 +1,5 @@
+<<EOT
+DD_IP = 18.184.74.206
+DD_password = i-083063cf700c21211 
+S3_Bucket = ddve6-bucket-terraform
+EOT
