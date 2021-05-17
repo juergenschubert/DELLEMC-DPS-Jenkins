@@ -27,10 +27,25 @@ pipeline {
                     }
                 }
             }
-    stage('terraform') {
+    stage('terraform init') {
           sh """
              terraform init
+          """
+          //write the template output in a file
+          def fileContent = sh(returnStdout: true, script: "terraform output neededForAnsible")
+          writeFile file: "${WORKSPACE}/vars.yaml", text: fileContent
+        }
+    stage('terraform plan') {
+          sh """
              terraform plan
+             terraform apply --auto-approve
+          """
+          //write the template output in a file
+          def fileContent = sh(returnStdout: true, script: "terraform output neededForAnsible")
+          writeFile file: "${WORKSPACE}/vars.yaml", text: fileContent
+        }
+    stage('terraform apply') {
+          sh """
              terraform apply --auto-approve
           """
           //write the template output in a file
